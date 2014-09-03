@@ -977,6 +977,29 @@
       ],
       "Datasource": {
         "type": "postgis",
+        "table": "(select way,admin_level\n       from planet_osm_roads\n       where \"boundary\"='administrative'\n         and admin_level in ('0','1','2','3','4')\n       ) as admin_01234",
+        "extent": "-20037508,-20037508,20037508,20037508",
+        "key_field": "",
+        "geometry_field": "way",
+        "dbname": "gis"
+      },
+      "id": "admin-01234-casing",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "admin-01234-casing"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -179.99999692067183,
+        -85.05112877980659,
+        179.99999692067183,
+        85.05112877980659
+      ],
+      "Datasource": {
+        "type": "postgis",
         "table": "(select way,admin_level\n       from planet_osm_roads\n       where \"boundary\"='administrative'\n         and admin_level in ('5','6','7','8')\n       ) as admin_5678",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
@@ -1000,7 +1023,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "(select way,admin_level\n       from planet_osm_roads\n       where \"boundary\"='administrative'\n         and admin_level in ('9', '10')\n       ) as admin_other",
+        "table": "\n         (select \n\tcase when boundary ='administrative' and admin_level is null  then 'NULL' \n\t\telse case when \"boundary\" ='administrative' and admin_level not in ('0','1','2','3','4','5','6','7','8') then 'greater9' \n\t\tend \t\n\tend \n\tas admin_remainder,\nway,admin_level from planet_osm_roads\nwhere \"boundary\"='administrative'\n         and (admin_level is null or admin_level not in ('0','1','2','3','4','5','6','7','8')))\nas admin_other",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
