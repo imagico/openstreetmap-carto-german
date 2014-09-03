@@ -1,7 +1,8 @@
 #aerialways {
   [aerialway = 'cable_car'],
   [aerialway = 'gondola'],
-  [aerialway = 'goods'] {
+  [aerialway = 'goods'],
+  [aerialway = 'mixed_lift'] {
     [zoom >= 12] {
       line-pattern-file: url('symbols/cable_car.png');
     }
