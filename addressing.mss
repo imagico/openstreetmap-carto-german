@@ -38,12 +38,12 @@
   [way_area >= 20000][zoom >= 16],
   [zoom >= 17] {
     text-name: "[name]";
-    text-size: 11;
-    text-fill: #444;
+    text-size: 10;
+    text-fill: #4c8056;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 20;
-    text-halo-fill: rgba(255,255,255,0.5);
+    text-halo-fill: rgb(255,255,255);
     text-placement: interior;
   }
 }
