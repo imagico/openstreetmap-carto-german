@@ -4,6 +4,10 @@ An adaptation of the "German" Mapnik style to the CartoCSS structure used by the
 style. The rest of this README is the original text from the international style; see README_DEUTSCH.md
 for details about the adaptation.
 
+NOTE THAT THIS IS WORK IN PROGRESS - the style already looks very much like the German style but it
+is not perfect yet. README_DEUTSCH.md has a to-do list and readers are encouraged to participate in 
+fixing, and/or transferring to-do items to proper Github issues.
+
 
 # OpenStreetMap Carto
 
