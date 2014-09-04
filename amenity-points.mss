@@ -1,9 +1,17 @@
-@marina-text: #576ddf; // also swimming_pool
-@military-text: #99001a;
+@marina-text: blue; 
+@military-text: pink;
 @park-text: #2c4b2c;
 @shop-icon: #ac39ac;
 @transportation-icon: #0092da;
-@transportation-text: #0066ff;
+
+
+@textcolor1:#734a08;
+@textcolor2:brown;
+@textcolor3:black;
+@textcolor4:#0066ff;
+@textcolor5:#000033;
+
+
 
 .points {
   [tourism = 'alpine_hut'][zoom >= 13]::tourism {
@@ -11,7 +19,7 @@
     point-placement: interior;
   }
 
-  [amenity = 'shelter'][zoom >= 16]::amenity {
+  [amenity = 'shelter'][zoom >= 18]::amenity {
     point-file: url('symbols/shelter2.p.16.png');
     point-placement: interior;
   }
@@ -36,8 +44,8 @@
     point-placement: interior;
   }
 
-  [highway = 'bus_stop']::highway {
-    [zoom >= 16] {
+  [highway = 'bus_stop'],[amenity = 'bus_stop']::highway {
+    [zoom = 16] {
       point-file: url('symbols/bus_stop_small.png');
       point-placement: interior;
     }
@@ -105,9 +113,14 @@
     point-file: url('symbols/guest_house.p.16.png');
     point-placement: interior;
   }
-
+  
+  [tourism = 'bed_and_breakfast'][zoom >= 17]::tourism {
+    point-file: url('symbols/bandb.p.20.png');
+    point-placement: interior;
+  }
+  /*png-Datei ausgetauscht*/
   [amenity = 'hospital'][zoom >= 15]::amenity {
-    point-file: url('symbols/hospital.p.16.png');
+    point-file: url('symbols/hospital2.png');
     point-placement: interior;
   }
 
@@ -163,22 +176,27 @@
     point-file: url('symbols/museum.p.16.png');
     point-placement: interior;
   }
-
-  [amenity = 'parking'][zoom >= 15]::amenity {
-    marker-file: url('symbols/parking.svg');
-    marker-placement: interior;
-    marker-clip: false;
-    marker-fill: @transportation-icon;
-    [access != ''][access != 'public'][access != 'yes'] {
-      marker-opacity: 0.33;
-    }
-  }
-
+  
+/*Parkplaetze sind im AA-Stil anders gestaltet ... -->Layerdefinition wurde ergaenzt (s.access_class)-- dadurch auch Neudefinition bei amenity-points-poly notwendig--  und Symbol angepasst*/
+	[zoom>=16]::amenity
+	{
+		[amenity = 'parking'] [access = 'public'] , 
+		[amenity = 'parking'] [access = 'yes'],
+		[amenity = 'parking'] [access_class = 'NULL'] 
+		{point-file: url('symbols/parking.p.16.png');
+      point-placement: interior;}
+		[amenity = 'parking'] [access != ''] [access != 'public'] [access != 'yes'] 
+		{point-file: url('symbols/parking_private.p.16.png');
+			point-placement: interior;
+		}
+	}
+/*Symbol ergänzt*/
   [amenity = 'pharmacy'][zoom >= 17]::amenity {
-    point-file: url('symbols/pharmacy.p.16.png');
+    point-file: url('symbols/pharmacy2.png');
     point-placement: interior;
   }
 
+  /* Symbole an Andy Allan angepasst .... + hindu / shinto / taoist jetzt auch Teil d. dt. Stils;  */
   [amenity = 'place_of_worship'][zoom >= 16]::amenity {
     point-file: url('symbols/place_of_worship3.p.16.png');
     point-placement: interior;
@@ -224,7 +242,7 @@
   }
 
   [amenity = 'pub'][zoom >= 16]::amenity {
-    point-file: url('symbols/pub.p.16.png');
+    point-file: url('symbols/pub2.png');
     point-placement: interior;
   }
 
@@ -282,6 +300,21 @@
     point-file: url('symbols/view_point.p.16.png');
     point-placement: interior;
   }
+ /*Ergänzt:  veterinary, bench, waste_basket*/
+    [amenity = 'veterinary'][zoom >= 17]::amenity{
+    point-file: url('symbols/amenity_veterinary.p.16.png');
+    point-placement: interior;
+  }
+  
+    [amenity = 'bench'][zoom >= 18]::amenity{
+    point-file: url('symbols/amenity_bench.p.8.png');
+    point-placement: interior;
+  }
+  
+	[amenity = 'waste_basket'][zoom >= 18]::amenity{
+    point-file: url('symbols/amenity_bench.p.8.png');
+    point-placement: interior;
+  }
 
   [man_made = 'water_tower'][zoom >= 17]::man_made {
     point-file: url('symbols/tower_water.p.20.png');
@@ -292,44 +325,84 @@
     point-file: url('symbols/tourist_memorial.p.20.png');
     point-placement: interior;
   }
-
+  
+/*Symbol geändert:*/
   [historic = 'archaeological_site'][zoom >= 16]::historic {
-    point-file: url('symbols/tourist_archaeological2.glow.24.png');
+    point-file: url('symbols/tourist_archaeological2.glow.16.png');
     point-placement: interior;
   }
-
+  
+  
+  [zoom >= 17]  [historic = 'castle']::historic 
+	{point-file: url('atkis-symbols/burg.png');
+		point-placement: interior;
+	}
+	
+   [zoom >= 14] [historic = 'castle']::historic 
+  {
+	  [ruins ='yes']
+	  {
+		point-file: url('atkis-symbols/burgruine.png');
+		point-placement: interior;
+	  }
+	   [ruins !='yes']
+	  {
+		point-file: url('atkis-symbols/burg.png');
+		point-placement: interior;
+	  }
+  }
+   
+  
+  /*Symbol und Stil geändert */
   [shop = 'supermarket'][zoom >= 16]::shop {
-    marker-file: url('symbols/shop_supermarket.svg');
+    marker-file: url('symbols/shop_supermarket.p.16.png');
     marker-placement: interior;
-    marker-clip: false;
-    marker-fill: @shop-icon;
   }
 
   [shop = 'bakery'][zoom >= 17]::shop {
     point-file: url('symbols/shop_bakery.p.16.png');
     point-placement: interior;
   }
+  
+/*Eingefügt:  bicycle / books , bei books Dateinamen standardisiert...*/
+  [shop = 'bicycle'][zoom >= 17]::shop {
+    point-file: url('symbols/shopping_bicycle.p.16.png');
+    point-placement: interior;
+  }
+  
+  [shop = 'books'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_books.p.16.png');
+    point-placement: interior;
+  }
+
 
   [shop = 'butcher'][zoom >= 17]::shop {
     point-file: url('symbols/shop_butcher.png');
     point-placement: interior;
   }
-
-  [shop = 'clothes']::shop,
-  [shop = 'fashion']::shop {
-    [zoom >= 17] {
-      marker-file: url('symbols/shop_clothes.svg');
-      marker-placement: interior;
-      marker-clip: false;
-      marker-fill: @shop-icon;
-    }
+  /*Eingefügt:  car / car repair ...*/
+  
+   [shop = 'car'][zoom >= 17]::shop {
+    point-file: url('symbols/shopping_car.p.16.png');
+    point-placement: interior;
   }
-
-  [shop = 'convenience'][zoom >= 17]::shop {
-    marker-file: url('symbols/shop_convenience.svg');
+  
+   [shop = 'car_repair'][zoom >= 17]::shop {
+    point-file: url('symbols/shopping_car_repair.p.16.png');
+    point-placement: interior;
+  }
+  
+      /*Eingefügt:  Computer..., Dateinamen nach Konvention umbenannt : ...p.16.png statt p_16.png*/
+  
+    [shop = 'computer'][zoom >= 17]::shop {
+    marker-file: url('symbols/shop_computer.p.16.png');
     marker-placement: interior;
-    marker-clip: false;
-    marker-fill: @shop-icon;
+  }
+  
+    /* Auf dt. Angaben reduziert */
+  [shop = 'convenience'][zoom >= 17]::shop {
+    marker-file: url('symbols/shop_convenience.p.16.png');
+    marker-placement: interior;
   }
 
   [shop = 'department_store'][zoom >= 16]::shop {
@@ -342,8 +415,27 @@
     point-placement: interior;
   }
 
+       /*Eingefügt: dryclean, Symbolnamen standardisiert*/
+  
+  
+    [shop = 'dry_cleaning'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_dry_cleaning.p.16.png');
+    point-placement: interior;
+  }
+  
   [shop = 'florist'][zoom >= 17]::shop {
     point-file: url('symbols/florist.p.16.png');
+    point-placement: interior;
+  }
+  
+       /*Eingefügt: gift, greengrocer, Dateinamen standardisiert...*/
+    [shop = 'gift'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_gift.p.16.png');
+    point-placement: interior;
+  }
+  
+    [shop = 'greengrocer'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_greengrocer.p.16.png');
     point-placement: interior;
   }
 
@@ -351,8 +443,34 @@
     point-file: url('symbols/shop_hairdresser.p.16.png');
     point-placement: interior;
   }
+  
+  /*jewelry und mobile phone, optician, pet: Ergänzt und Bildnamen standardisiert */
+    [shop = 'jewelry'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_jewelry.p.16.png');
+    point-placement: interior;
+  }
 
-  [shop = 'car'][zoom >= 17]::shop {
+    [shop = 'mobile_phone'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_mobile_phone.p.16.png');
+    point-placement: interior;
+  }
+  
+    [shop = 'optician'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_optician.p.16.png');
+    point-placement: interior;
+  }
+  
+    [shop = 'pet'][zoom >= 17]::shop {
+    point-file: url('symbols/shop_pet.p.16.png');
+    point-placement: interior;
+  }
+  
+
+  
+  /*  car, car_repair und bicycle im dt. nicht spezifisch dargestellt */
+  
+  /*
+    [shop = 'car'][zoom >= 17]::shop {
     marker-file: url('symbols/shop_car.svg');
     marker-placement: interior;
     marker-clip: false;
@@ -367,22 +485,26 @@
   [shop = 'bicycle'][zoom >= 17]::shop {
     point-file: url('symbols/shopping_bicycle.p.16.png');
     point-placement: interior;
-  }
+  }*/
 
+  
   [leisure = 'playground'][zoom >= 17]::leisure {
     point-file: url('symbols/playground.p.20.png');
     point-placement: interior;
   }
-
-  [tourism = 'picnic_site'][zoom >= 16]::tourism {
+/* Eintrag f. Picnic wird im dt. Stil in amenity, nicht in leisure gesucht und entspr. auch über amenity, nicht über leisure in der Layerdefinition enthalten. 
+  Picnic-Tische werden weder in der dt. Layerdefinition noch in der Symbologie berücksichtigt */
+  [amenity = 'picnic_site'][zoom >= 16]::tourism {
     point-file: url('symbols/picnic.p.16.png');
     point-placement: interior;
   }
 
+  /*
   [leisure = 'picnic_table'][zoom >= 17]::leisure {
     point-file: url('symbols/picnic.p.16.png');
     point-placement: interior;
   }
+  */
 
   [leisure = 'slipway'][zoom >= 17]::leisure {
     point-file: url('symbols/transport_slipway.p.20.png');
@@ -391,13 +513,18 @@
 }
 
 
+  
+/*.text ist in eigenem Layer mit id und Klasse definiert ... im xml-Stil finden sich die Textlayer-Definitionen noch in der osm-de.xml , die Symnbologie-Defs auch*/
+
 .text {
   [place = 'island'][zoom >= 12]::place {
     text-name: "[name]";
     text-fill: #000;
     text-size: 9;
+	text-dy: 9;
     text-face-name: @oblique-fonts;
     text-halo-radius: 1;
+	text-wrap-width: 0;
     text-placement: interior;
   }
 
@@ -408,7 +535,7 @@
   [amenity = 'biergarten']::amenity {
     [zoom >= 17] {
       text-name: "[name]";
-      text-fill: #734a08;
+      text-fill: @textcolor1;
       text-size: 10;
       text-dy: 9;
       text-face-name: @bold-fonts;
@@ -421,7 +548,7 @@
   [amenity = 'bar'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 11;
     text-face-name: @bold-fonts;
     text-halo-radius: 1;
@@ -434,7 +561,7 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: 10;
-      text-fill: #734a08;
+      text-fill: @textcolor1;
       text-dy: 12;
       text-face-name: @bold-fonts;
       text-halo-radius: 1;
@@ -445,31 +572,39 @@
   [amenity = 'cinema'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 14;
     text-face-name: @bold-fonts;
     text-halo-radius: 1;
     text-placement: interior;
   }
 
-  [amenity = 'parking'][zoom >= 17]::amenity {
+  
+ /*Layerdefinitionen für text und text-poly bzgl. NULLs erweitert */
+  
+  [zoom >= 17]
+  {
+ [amenity = 'parking'] [access = 'public'], [amenity = 'parking'] [access_class = 'NULL']::amenity {
+	
     text-name: "[name]";
     text-size: 9;
-    text-fill: @transportation-text;
+    text-fill: @textcolor4;
     text-dy: 9;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 34;
     text-placement: interior;
-    [access != ''][access != 'public'][access != 'yes'] {
+    [amenity = 'parking'][access != 'public'][access_class != 'NULL']::amenity {
       text-fill: #66ccaf;
     }
   }
+  }
+
 
   [amenity = 'police'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 10;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -480,7 +615,7 @@
   [amenity = 'fire_station'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 9;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -491,14 +626,16 @@
   [amenity = 'place_of_worship'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #000033;
-    text-dy: 12;
+    text-fill: @textcolor5;
+    text-dy: 11;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 30;
     text-placement: interior;
   }
 
+  /*wood im dt. nicht spezifiziert */
+/*
   [natural = 'wood'][zoom >= 15]::natural {
     text-name: "[name]";
     text-size: 10;
@@ -508,20 +645,22 @@
     text-wrap-width: 10;
     text-placement: interior;
   }
-
+  */
+  
+  /*
   [natural = 'peak']::natural,
   [natural = 'volcano']::natural {
     [zoom >= 13] {
       text-name: "[name]";
       text-size: 10;
-      text-fill: brown;
+      text-fill: @textcolor2;
       text-dy: 7;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
       text-placement: interior;
       ele/text-name: "[ele]";
       ele/text-size: 9;
-      ele/text-fill: brown;
+      ele/text-fill: @textcolor2;
       ele/text-dy: 6;
       ele/text-face-name: @oblique-fonts;
       ele/text-halo-radius: 1;
@@ -532,10 +671,50 @@
     }
   }
 
+*/
+
+[natural = 'peak'],[natural = 'volcano']::natural{
+	
+	   
+		   [zoom >=13]{
+			text-size:10;
+			text-dy:5;
+			text-name: "[name]";
+			text-fill:@textcolor2;
+			text-face-name: @book-fonts;
+			text-halo-radius: 1;
+			text-placement: interior;
+		  }
+		  
+		 [zoom >=14]::natural{
+			text-name: "[ele]";
+			text-size:9;
+			text-fill:@textcolor2;
+			text-face-name: @oblique-fonts;
+			text-halo-radius: 1;
+			text-placement: interior;
+			 [name_class = 'NULL']{
+				text-size:9;
+				text-dy:6;
+			  }
+		  
+			[natural = 'peak'][name_class != 'NULL']{
+					text-size:9;
+					text-dy:18;
+				  }
+			[natural = 'volcano'][name_class != 'NULL']{
+					text-size:9;
+					text-dy:16;
+				  }
+		}
+	}
+
+	
+
   [natural = 'cave_entrance'][zoom >= 15]::natural {
     text-name: "[name]";
     text-size: 10;
-    text-fill: brown;
+    text-fill: @textcolor2;
     text-dy: 9;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -543,43 +722,47 @@
     text-placement: interior;
   }
 
-  [historic = 'memorial'][zoom >= 17]::historic {
+  [historic = 'memorial'][zoom >= 17], [historic = 'archaeological_site'][zoom >= 17]::historic {
     text-name: "[name]";
     text-size: 9;
-    text-fill: brown;
-    text-dy: 13;
+    text-fill: @textcolor2;
+    text-dy: 12;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 20;
     text-placement: interior;
   }
+  
 
-  [historic = 'archaeological_site'][zoom >= 17]::historic {
+  
+    [historic = 'castle'][zoom >= 17]::historic {
     text-name: "[name]";
-    text-size: 9;
-    text-fill: brown;
-    text-dy: 15;
-    text-face-name: @book-fonts;
+    text-size: 10;
+    text-fill: @textcolor3;
+    text-dy: 12;
+    text-face-name: @bold-fonts;
     text-halo-radius: 1;
     text-wrap-width: 20;
     text-placement: interior;
   }
-
+  
   [natural = 'water']::natural,
   [natural = 'lake']::natural,
   [landuse = 'reservoir']::landuse,
   [landuse = 'basin']::landuse {
     [zoom >= 15] {
       text-name: "[name]";
-      text-size: 12;
+      text-size: 10;
       text-fill: @water-text;
-      text-face-name: @oblique-fonts;
+      text-face-name: @book-fonts;
       text-halo-radius: 1;
       text-wrap-width: 20;
       text-placement: interior;
     }
   }
 
+//folgende Styles grob von UK-carto übernommen: 
+//---------------------  
   [leisure = 'swimming_pool']::leisure {
     [zoom >= 17] {
       text-name: "[name]";
@@ -660,11 +843,11 @@
   [landuse = 'grave_yard']::landuse  {
     [zoom >= 15] {
       text-name: "[name]";
-      text-size: 9;
-      text-fill: darken(@cemetery, 50%);
+      text-size: 10;
+      text-fill: @park-text;
       text-face-name: @book-fonts;
       // extra halo needed to overpower the cemetery polygon pattern
-      text-halo-radius: 1.5;
+      text-halo-radius: 1;
       text-wrap-width: 10;
     }
   }
@@ -795,7 +978,20 @@
       text-wrap-width: 10;
     }
   }
-
+//------------------------
+  /*dt. Reste-Pointtext-Style */
+   [point ='yes'][zoom >= 15]::leisure{
+	 [leisure_class != 'NULL'], [landuse_class != 'NULL']{
+		text-name: "[name]";
+		text-size: 9;
+		text-fill: #000;
+		text-face-name: @book-fonts;
+		text-halo-radius: 2;
+		text-wrap-width: 10;
+		text-placement: interior;
+	  }
+  }
+  
   [natural = 'bay'][zoom >= 14]::natural {
     text-name: "[name]";
     text-size: 10;
@@ -808,13 +1004,13 @@
 
   [natural = 'spring'][zoom >= 16]::natural {
     text-name: "[name]";
-    text-size: 10;
+    text-size: 8;
     text-fill: #6699cc;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 20;
     text-placement: interior;
-    text-dy: 6;
+    text-dy: 10;
   }
 
   [tourism = 'alpine_hut'][zoom >= 15]::tourism {
@@ -835,7 +1031,10 @@
       ele/text-placement: interior;
     }
   }
-
+/*Syntax mit ele/text--> Effekt: eine weitere Textzeile anhand eines anderen Felds, ähnlich :: -
+ ? hier werden Attribute von ele erzeugt ....
+  
+  */
   [amenity = 'shelter'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 9;
@@ -856,21 +1055,21 @@
   [amenity = 'bank'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 9;
-    text-fill: black;
+    text-fill: @textcolor3;
     text-dy: 9;
     text-halo-radius: 1;
     text-placement: interior;
     text-face-name: @book-fonts;
   }
-
+  
+/*Motel wird im dt. nicht berücksichtigt */
   [tourism = 'hotel']::tourism,
-  [tourism = 'motel']::tourism,
   [tourism = 'hostel']::tourism,
   [tourism = 'chalet']::tourism {
     [zoom >= 17] {
       text-name: "[name]";
       text-size: 10;
-      text-fill: #0066ff;
+      text-fill: @textcolor4;
       text-dy: 11;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
@@ -881,7 +1080,7 @@
   [amenity = 'embassy'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #0066ff;
+    text-fill: @textcolor4;
     text-dy: 8;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -891,8 +1090,8 @@
   [tourism = 'guest_house'][zoom >= 17]::tourism {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #0066ff;
-    text-dy: 10;
+    text-fill: @textcolor4;
+    text-dy: 9;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-placement: interior;
@@ -901,8 +1100,8 @@
   [tourism = 'bed_and_breakfast'][zoom >= 17]::tourism {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #0066ff;
-    text-dy: 8;
+    text-fill: @textcolor4;
+    text-dy: 7;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-placement: interior;
@@ -913,7 +1112,7 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: 9;
-      text-fill: @transportation-text;
+      text-fill: @textcolor4;
       text-dy: 9;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
@@ -923,7 +1122,7 @@
   [tourism = 'camp_site'][zoom >= 17]::tourism {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #0066ff;
+    text-fill: @textcolor4;
     text-dy: 15;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -933,7 +1132,7 @@
   [tourism = 'caravan_site'][zoom >= 17]::tourism {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #0066ff;
+    text-fill: @textcolor4;
     text-dy: 19;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -944,7 +1143,7 @@
     text-name: "[name]";
     text-size: 9;
     text-dy: 10;
-    text-fill: #0066ff;
+    text-fill: @textcolor4;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 70;
@@ -966,7 +1165,7 @@
   [tourism = 'theme_park'][zoom >= 14]::tourism {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 30;
@@ -980,7 +1179,7 @@
     text-name: "[name]";
     text-size: 10;
     text-dy: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-placement: interior;
@@ -989,7 +1188,7 @@
   [amenity = 'prison'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 16;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -1009,7 +1208,7 @@
   [amenity = 'university'][zoom >= 15]::amenity {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #000033;
+    text-fill: @textcolor5;
     text-face-name: @bold-fonts;
     text-halo-radius: 1;
     text-wrap-width: 16;
@@ -1021,7 +1220,7 @@
     [zoom >= 15] {
       text-name: "[name]";
       text-size: 9;
-      text-fill: #000033;
+      text-fill: @textcolor5;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
       text-wrap-width: 14;
@@ -1032,7 +1231,7 @@
   [amenity = 'kindergarten'][zoom >= 16]::amenity {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #000033;
+    text-fill: @textcolor5;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 14;
@@ -1042,7 +1241,7 @@
   [man_made = 'lighthouse'][zoom >= 15]::man_made {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #000033;
+    text-fill: @textcolor5;
     text-dy: 16;
     text-face-name: @book-fonts;
     text-halo-radius: 2;
@@ -1053,7 +1252,7 @@
   [man_made = 'windmill'][zoom >= 17]::man_made {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #734a08;
+    text-fill: @textcolor1;
     text-dy: 12;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
@@ -1063,7 +1262,7 @@
 
   [amenity = 'hospital'][zoom >= 16]::amenity {
     text-name: "[name]";
-    text-fill: #da0092;
+    text-fill: #e21b00;
     text-size: 8;
     text-dy: 10;
     text-face-name: @book-fonts;
@@ -1075,8 +1274,8 @@
   [amenity = 'pharmacy'][zoom >= 17]::amenity {
     text-name: "[name]";
     text-size: 8;
-    text-dy: 10;
-    text-fill: #da0092;
+    text-dy: 9;
+    text-fill: #e21b00;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
     text-wrap-width: 12;
@@ -1094,10 +1293,10 @@
   [shop = 'car_repair']::shop,
   [shop = 'bicycle']::shop,
   [shop = 'florist']::shop {
-    [zoom >= 17] {
+    [zoom >= 18] {
       text-name: "[name]";
       text-size: 8;
-      text-dy: 10;
+      text-dy: 9;
       text-fill: #939;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
@@ -1111,7 +1310,7 @@
     [zoom >= 16] {
       text-name: "[name]";
       text-size: 9;
-      text-dy: 11;
+      text-dy: 9;
       text-fill: #939;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
@@ -1130,6 +1329,8 @@
     text-placement: interior;
   }
 
+  /* im dt . nicht berücksichtigt: */
+  /*
   [landuse = 'military']::landuse {
     [zoom >= 15] {
       text-name: "[name]";
@@ -1141,6 +1342,7 @@
       text-placement: interior;
     }
   }
+  */
 
   [aeroway = 'gate'][zoom >= 17]::aeroway {
     text-name: "[ref]";
@@ -1152,3 +1354,7 @@
     text-placement: interior;
   }
 }
+
+
+  
+   
