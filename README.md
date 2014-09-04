@@ -1,3 +1,10 @@
+# OpenStreetMap Carto German
+
+An adaptation of the "German" Mapnik style to the CartoCSS structure used by the international
+style. The rest of this README is the original text from the international style; see README_DEUTSCH.md
+for details about the adaptation.
+
+
 # OpenStreetMap Carto
 
 An implemention of the standard OpenStreetMap mapnik style, in CartoCSS.
