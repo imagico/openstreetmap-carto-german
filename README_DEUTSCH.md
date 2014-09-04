@@ -41,17 +41,17 @@ neue Layer erstellen über AddLayer → postgis.
 Connection: z.B. 
 ```
 dbname=osmtest
- ```    
+```    
  SQL in der Form   z.B. 
 ```
 (select way,ref,name  from planet_osm_point where highway='motorway_junction' ) as highway_junctions
-    ```
+```
 Achtung bei Option 'Save&Style' wird automatisch ein Layer-Style vorgegeben.
 Achtung bei Anlage Layer über GUI wird evtl. layer-extent  falsch von TileMill berechnet und in  project.mml geschrieben. Über select-checkbox oder manuell über Editor korrigieren. 
 später Layer im .mss-file  stylen mit Selektor 
-    ```
+```
 #highway_junctions{} 
-    ```
+```
 Einstiegskoordinaten evtl. festlegen, über TileMill oder in project.mml: 
 ```
 "center": [   9.21758249779922,  49.1451587779647, 16  ]
