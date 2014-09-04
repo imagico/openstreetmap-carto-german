@@ -74,30 +74,30 @@ Kommentare in  .mss-Dateien  wie bei css mit // bzw. /* */
 nächste Datei rückt in GUI auf. So  ggf. auch in TileMill selbst  mittelgroße Projekte 
 
 ## To Do:
-roads: bridges, tunnels an dt. Stil anpassen (Breiten und Farbe)
-casings
-fills 
-overlays 
-je per .bridges, .tunnels
-Änderungen im dt. Stil seit r28081, 14.03.2012, die noch nicht auf Sicht durchgeführt wurden, nachvollziehen
-z.B. sports-Layer-Style und sports-surface-Style wie in xml-Stil
-localized names
-tracks überprüfen
+* roads: bridges, tunnels an dt. Stil anpassen (Breiten und Farbe)
+* casings
+* fills 
+* overlays 
+* je per .bridges, .tunnels
+* Änderungen im dt. Stil seit r28081, 14.03.2012, die noch nicht auf Sicht durchgeführt wurden, nachvollziehen
+ z.B. sports-Layer-Style und sports-surface-Style wie in xml-Stil
+* localized names
+* tracks überprüfen
 z.B.Farbe tracks grade1 anpassen
-railways prüfen
-admin-boundaries evtl. nochmal überarbeiten
-Punkttexte v.a. in hohen Zoomstufen prüfen
-Friedhofsnummern
+* railways prüfen
+* admin-boundaries evtl. nochmal überarbeiten
+* Punkttexte v.a. in hohen Zoomstufen prüfen
+* Friedhofsnummern
 
 ## Done:
 openstreetmap-carto-Stil  weitgehend auf dt. OSM-Stil angepasst: 
-dt. Symbole & Schilder im Ordner ergänzt ...
-„periphere“ .mss-Dateien aus OSM Carto anhand  gleichnamiger inc.xml-Dateien und  zentraler osm-de.xml v. Mapnik überprüft und geändert
-z.B.  layer-amenity-point.xml.inc →  amenity-point.mss 
-tlw. Layerdefinitionen ergänzt
-Kernstück roads.mss: OSM-Carto-Struktur weicht stark von xml-Stil ab
-Farben und Dicken major roads von xml übernommen
-minor roads  punktuell und auf Sicht angepasst
-Layderdef-Änderungen und Style-Änderungen von math1985 ('Move control over road rendering order to SQL' ,  auf github bei  gravitystorm/openstreetmap-carto) übernommen
+* dt. Symbole & Schilder im Ordner ergänzt ...
+* „periphere“ .mss-Dateien aus OSM Carto anhand  gleichnamiger inc.xml-Dateien und  zentraler osm-de.xml v. Mapnik überprüft und geändert
+ z.B.  layer-amenity-point.xml.inc →  amenity-point.mss 
+* tlw. Layerdefinitionen ergänzt
+* Kernstück roads.mss: OSM-Carto-Struktur weicht stark von xml-Stil ab
+* Farben und Dicken major roads von xml übernommen
+* minor roads  punktuell und auf Sicht angepasst
+* Layderdef-Änderungen und Style-Änderungen von math1985 ('Move control over road rendering order to SQL' ,  auf github bei  gravitystorm/openstreetmap-carto) übernommen
     
 
