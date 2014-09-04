@@ -1137,7 +1137,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "(select way,place,name,ref\n       from planet_osm_point\n       where place in ('city','town') and capital='yes'\n      ) as placenames_capital",
+        "table": "(select way,place,name,ref\n       from planet_osm_point\n       where place in ('city','metropolis','town') and capital='yes'\n      ) as placenames_capital",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
@@ -1160,7 +1160,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "(select way,place,name\n      from planet_osm_point\n      where place in ('city','town')\n        and (capital is null or capital != 'yes')\n      ) as placenames_medium",
+        "table": "(select way,place,name\n      from planet_osm_point\n      where place in ('city','metropolis')\n        and (capital is null or capital != 'yes')\n      ) as placenames_medium",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
@@ -1177,13 +1177,37 @@
       "geometry": "point",
       "extent": [
         -179.99999692067183,
+        -85.051,
+        179.99999692067183,
+        85.051
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": " (select way,place,name,population\n      from planet_osm_point\n      where place in ('city','metropolis','town','large_town','small_town')\n        and (capital is null or capital != 'yes')\n      order by population desc\n      ) as placenames_medium2\n\t  ",
+        "key_field": "",
+        "geometry_field": "way",
+        "extent_cache": "auto",
+        "extent": "-20037508,-20037508,20037508,20037508",
+        "dbname": "gis"
+      },
+      "id": "placenames-medium2",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "placenames-medium2"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -179.99999692067183,
         -85.05112877980659,
         179.99999692067183,
         85.05112877980659
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "(select way,place,name\n      from planet_osm_point\n      where place in ('suburb','village','hamlet','neighbourhood','locality','isolated_dwelling','farm')\n      ) as placenames_small",
+        "table": "(select way,place,name\n      from planet_osm_point\n      where place in ('suburb','village','large_village','hamlet','neighbourhood','locality','isolated_dwelling','farm')\n      ) as placenames_small",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
