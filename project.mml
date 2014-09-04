@@ -213,7 +213,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "      (select way,\"natural\",waterway,landuse,name\n      from planet_osm_polygon\n      where (waterway in ('dock','mill_pond','riverbank','canal')\n         or landuse in ('reservoir','water','basin')\n         or \"natural\" in ('lake','water','land','glacier','mud'))\n         and building is null\n      order by z_order,way_area desc\n      ) as water_areas",
+        "table": "      (select way,\"natural\",waterway,landuse,name\n      from planet_osm_polygon\n      where (waterway in ('dock','mill_pond','riverbank','canal')\n         or landuse in ('reservoir','water','basin')\n         or \"natural\" in ('lake','water','land','glacier','mud','bay'))\n         and building is null\n      order by z_order,way_area desc\n      ) as water_areas",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
@@ -259,7 +259,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "      (select way,waterway,lock,name,tunnel\n      from planet_osm_line\n      where waterway in ('weir','river','canal','derelict_canal','stream','drain','ditch','wadi')\n        and (bridge is null or bridge not in ('yes','true','1','aqueduct'))\n      order by z_order\n      ) as water_lines",
+        "table": " (select way,waterway,disused,lock,name, \n\t case when tunnel in ('yes','true','1') then 'yes'::text else tunnel end as tunnel\n from planet_osm_line\n where waterway in ('weir','river','canal','derelict_canal','stream','drain','ditch','wadi')\n and (bridge is null or bridge not in ('yes','true','1','aqueduct'))\n order by z_order\n ) as water_lines",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
@@ -1689,7 +1689,7 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "      (select way,waterway,lock,name,tunnel\n      from planet_osm_line\n      where waterway in ('weir','river','canal','derelict_canal','stream','drain','ditch','wadi')\n       order by z_order\n      ) as water_lines_text",
+        "table": "      (select way,waterway,lock,name,tunnel,disused\n      from planet_osm_line\n      where waterway in ('weir','river','canal','derelict_canal','stream','drain','ditch','wadi')\n       order by z_order\n      ) as water_lines_text",
         "extent": "-20037508,-20037508,20037508,20037508",
         "key_field": "",
         "geometry_field": "way",
