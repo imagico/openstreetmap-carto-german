@@ -2370,6 +2370,7 @@
       shield-spacing: 750;
       shield-min-distance: 30;
       shield-face-name: @bold-fonts;
+      shield-min-padding: 31;
     shield-clip: false;
     }
   }
@@ -2383,6 +2384,7 @@
     shield-spacing: 750;
     shield-min-distance: 30;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
   shield-clip: false;
   }
 
@@ -2395,6 +2397,7 @@
     shield-spacing: 750;
     shield-min-distance: 30;
     shield-face-name: @book-fonts ;
+    shield-min-padding: 31;
   shield-clip: false;
   }
 
@@ -2403,10 +2406,11 @@
     shield-size: 10;
     shield-fill: #000;
     shield-placement: line;
-     shield-file: url("symbols/L[length].png");
+    shield-file: url("symbols/L[length].png");
     shield-spacing: 750;
     shield-min-distance: 40;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
   shield-clip: false;
   }
 }
@@ -2422,6 +2426,7 @@
       shield-spacing: 750;
       shield-min-distance: 30;
       shield-face-name: @bold-fonts;
+      shield-min-padding: 31;
     shield-clip: false;
     }
   }
@@ -2435,6 +2440,7 @@
     shield-spacing: 750;
     shield-min-distance: 30;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
     shield-clip: false;
   }
 
@@ -2447,6 +2453,7 @@
   shield-spacing: 750;
     shield-min-distance: 30;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
     shield-clip: false;
   }
 
@@ -2459,6 +2466,7 @@
   shield-spacing: 750;
     shield-min-distance: 40;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
     shield-clip: false;
   }
 
@@ -2467,10 +2475,11 @@
     shield-size: 10;
     shield-fill: #000;
     shield-placement: line;
-  shield-file: url("symbols/L[length].png");   
-  shield-spacing: 750;
+    shield-file: url("symbols/L[length].png");   
+    shield-spacing: 750;
     shield-min-distance:40;
     shield-face-name: @book-fonts;
+    shield-min-padding: 31;
     shield-clip: false;
   }
 
