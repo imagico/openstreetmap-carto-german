@@ -37,7 +37,7 @@
     text-fill: #375841;
     text-face-name: @oblique-fonts;
     text-halo-radius: 1;
-    text-wrap-width: 0;
+    text-wrap-width: 40;
     [zoom >= 5] {
       text-name: "[name]";
       text-fill:#629471;
