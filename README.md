@@ -8,9 +8,9 @@ NOTE THAT THIS IS WORK IN PROGRESS - the style already looks very much like the 
 is not perfect yet. README_DEUTSCH.md has a to-do list and readers are encouraged to participate in 
 fixing, and/or transferring to-do items to proper Github issues.
 
-NOTE THAT THIS REQUIREST A HSTORE DATABASE - use the --hstore flag when importing with osm2pgsql. You can 
-get around the hstore requirement if you find the "tag->'something'" occurrences in the project.mml and
-manually add those columns to your osm2pgsql style file.
+The style is designed to use with a HSTORE DATABASE in mind. But is also working without it if al the
+required columns are added to a style. In our production setup we are using the provided views to
+osm2pgsql tables with hstore to simulate columns.
 
 # OpenStreetMap Carto
 
