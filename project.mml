@@ -32,7 +32,8 @@
     "ferry-routes.mss",
     "aerialways.mss",
     "admin.mss",
-    "addressing.mss"
+    "addressing.mss",
+    "sport.mss"
   ],
   "Layer": [
     {
@@ -458,6 +459,73 @@
       "properties": {
         "group-by": "layernotnull"
       }
+    },
+    {
+      "extent": [
+        -179.99999692067183,
+        -84.96651228427099,
+        179.99999692067183,
+        84.96651228427098
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select way,leisure,\ncase when leisure='pitch' then 2\n  when leisure='track' then 1\n  else 0 end as prio\n  from view_osmde_polygon\n  where leisure in ('sports_centre','stadium','pitch','track')\n  order by z_order,prio,way_area desc\n) as sports_grounds",
+	"extent": "-20037508,-20037508,20037508,20037508",
+	"key_field": "",
+	"geometry_field": "way",
+	"dbname": "osm"
+      },
+      "id": "sports-grounds",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "sports-grounds"
+    },
+    {
+      "extent": [
+        -179.99999692067183,
+        -84.96651228427099,
+        179.99999692067183,
+        84.96651228427098
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select *, cast(abs(a12-a23) as integer)%180 as angle_diff, (a12+a23+90)/2 as angle, 1/coslat as labelsizefactor, d12*d23 as pitch_area from (select *, st_npoints(way2) as nb, ST_Distance_sphere(st_transform(st_pointn(way2,1),4326),st_transform(st_pointn(way2,2),4326)) as d12, ST_Distance_sphere(st_transform(st_pointn(way2,3),4326),st_transform(st_pointn(way2,2),4326)) as d23, ST_Distance_sphere(st_transform(st_pointn(way2,1),4326),st_transform(st_pointn(way2,3),4326)) as d13, cos(st_y(st_transform(st_pointn(way2,1),4326))/180*3.1415927) as coslat, degrees(st_azimuth(st_pointn(way2,1),st_pointn(way2,2))) as a12, degrees(st_azimuth(st_pointn(way2,2),st_pointn(way2,3))) as a23 from (select *, st_area(way) as way_area, ST_ExteriorRing(ST_SimplifyPreserveTopology(way,100)) as way2 from (select (st_dump(way)).geom as way, sport, surface, access from view_osmde_polygon where sport in ('tennis','soccer','basketball','rugby','rugby_union','rugby_league','american_football') AND way && !bbox!) as dump) as simplified) as simplified2) as sports",
+	"extent": "-20037508,-20037508,20037508,20037508",
+	"key_field": "",
+	"geometry_field": "way",
+	"dbname": "osm"
+      },
+      "id": "sports",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "sports"
+    },
+    {
+      "extent": [
+        -179.99999692067183,
+        -84.96651228427099,
+        179.99999692067183,
+        84.96651228427098
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select way, tags->'piste:type' as ski_type, tags->'piste:difficulty' as ski_difficulty, ref, name from view_osmde_line where tags ? 'piste:difficulty') as ski",
+	"extent": "-20037508,-20037508,20037508,20037508",
+	"key_field": "",
+	"geometry_field": "way",
+	"dbname": "osm"
+      },
+      "id": "ski",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "ski",
+      "geometry": ""
     },
     {
       "geometry": "linestring",
